@@ -68,6 +68,7 @@ public class SpringBootSampleApplication {
 
         System.out.println(context.getBean(JDBCConfig.class));
         System.out.println(context.getBean(FileConfig.class));
+        System.out.println(context.getBean(DataSourceProperties.class));
 
 
     }

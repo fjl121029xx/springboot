@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-
+//第一种读取配置文件的方式
 @Configuration
 @PropertySource("classpath:config/jdbcinfo.properties")
 public class JDBCConfig {

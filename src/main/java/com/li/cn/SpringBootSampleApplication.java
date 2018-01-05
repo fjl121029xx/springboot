@@ -44,7 +44,7 @@ public class SpringBootSampleApplication {
         app.setAddCommandLineProperties(false);
 
         Properties properties = new Properties();
-        //第一种读取配置文件的方式
+        //设置配置文件的路径和名字
         properties.put("spring.config.location","classpath:conf/app.properties");
 
         app.setDefaultProperties(properties);
@@ -69,6 +69,11 @@ public class SpringBootSampleApplication {
         System.out.println(context.getBean(JDBCConfig.class));
         System.out.println(context.getBean(FileConfig.class));
         System.out.println(context.getBean(DataSourceProperties.class));
+
+
+        //application.yml
+        System.out.println(context.getEnvironment().getProperty("jdbc.username"));
+        System.out.println(context.getEnvironment().getProperty("jdbc.password"));
 
 
     }

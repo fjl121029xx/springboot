@@ -84,8 +84,9 @@ public class SpringBootSampleApplication {
         //动态的读取配置文件
         System.out.println(context.getEnvironment().getProperty("springboot.name"));
 
-
+        //
         System.out.println(context.getEnvironment().getProperty("jdbc.url"));
+
 
 
 

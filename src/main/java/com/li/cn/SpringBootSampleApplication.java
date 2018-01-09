@@ -42,6 +42,8 @@ public class SpringBootSampleApplication {
 
         SpringApplication app = new SpringApplication(SpringBootSampleApplication.class);
         app.setAddCommandLineProperties(false);
+        //--spring.profiles.active=test
+        app.setAdditionalProfiles("dev");
 
         Properties properties = new Properties();
         //设置配置文件的路径和名字
@@ -74,6 +76,17 @@ public class SpringBootSampleApplication {
         //application.yml
         System.out.println(context.getEnvironment().getProperty("jdbc.username"));
         System.out.println(context.getEnvironment().getProperty("jdbc.password"));
+
+        //注入一个集合\数组
+        System.out.println(context.getBean(TomcatProperties.class).getHosts());
+        System.out.println(context.getBean(TomcatProperties.class).getPorts()[2]);
+
+        //动态的读取配置文件
+        System.out.println(context.getEnvironment().getProperty("springboot.name"));
+
+
+        System.out.println(context.getEnvironment().getProperty("jdbc.url"));
+
 
 
     }

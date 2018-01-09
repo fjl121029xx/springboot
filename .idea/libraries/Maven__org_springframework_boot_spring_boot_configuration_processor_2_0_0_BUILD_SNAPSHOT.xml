@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.springframework.boot:spring-boot-configuration-processor:2.0.0.BUILD-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/2.0.0.BUILD-SNAPSHOT/spring-boot-configuration-processor-2.0.0.BUILD-20180103.221450-328.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/2.0.0.BUILD-SNAPSHOT/spring-boot-configuration-processor-2.0.0.BUILD-20180105.203019-341.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/2.0.0.BUILD-SNAPSHOT/spring-boot-configuration-processor-2.0.0.BUILD-20180103.221450-328-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/2.0.0.BUILD-SNAPSHOT/spring-boot-configuration-processor-2.0.0.BUILD-20180105.203019-341-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/2.0.0.BUILD-SNAPSHOT/spring-boot-configuration-processor-2.0.0.BUILD-20180103.221450-328-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/2.0.0.BUILD-SNAPSHOT/spring-boot-configuration-processor-2.0.0.BUILD-20180105.203019-341-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

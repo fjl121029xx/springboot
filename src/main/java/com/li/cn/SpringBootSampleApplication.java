@@ -1,5 +1,8 @@
 package com.li.cn;
 
+import com.li.cn.auto_configuration.EncodingConvert;
+import com.li.cn.auto_configuration.GBKEncodingConvert;
+import com.li.cn.auto_configuration.UTF8EncodingConvert;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -84,10 +87,11 @@ public class SpringBootSampleApplication {
         //动态的读取配置文件
         System.out.println(context.getEnvironment().getProperty("springboot.name"));
 
-        //
+        //切换spring boot 的配置文件
         System.out.println(context.getEnvironment().getProperty("jdbc.url"));
 
-
+        //基于条件的自动配置
+        System.out.println(context.getBeansOfType(EncodingConvert.class));
 
 
     }

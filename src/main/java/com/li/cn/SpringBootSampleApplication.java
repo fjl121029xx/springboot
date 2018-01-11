@@ -1,15 +1,19 @@
 package com.li.cn;
 
+import com.li.cn.asyn.Jeep;
 import com.li.cn.auto_configuration.EncodingConvert;
 import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,10 +22,12 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-@SpringBootApplication
+@SpringBootApplication()
 @EnableCaching
 @RestController
+@EnableAsync
 @EnableAutoConfiguration
+@EnableConfigurationProperties
 public class SpringBootSampleApplication {
 
     @RequestMapping("/")
@@ -95,6 +101,13 @@ public class SpringBootSampleApplication {
         System.out.println(context.getEnvironment().getProperty("file.encoding"));
 
         System.out.println(context.getBeansOfType(Runnable.class));
+
+        //spring boot 09 @Enable*注解的工作原理47:07
+        System.out.println(context.getBean(Tomcat2Properties .class));
+        /*异步请求*/
+        Runnable bean = context.getBean(Jeep.class);
+        System.out.println(bean);
+        System.out.println("===end===");
 
     }
 }

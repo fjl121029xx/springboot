@@ -45,9 +45,9 @@ public class SpringBootSampleApplication {
     }
 
     public static void main(String[] args) {
-    //http://blog.csdn.net/isea533/article/details/50281151     Spring Boot 属性配置和使用
+        //http://blog.csdn.net/isea533/article/details/50281151     Spring Boot 属性配置和使用
 
-    //https://www.cnblogs.com/magicalSam/p/7189421.html     Spring Boot 系列（三）属性配置&自定义属性配置
+        //https://www.cnblogs.com/magicalSam/p/7189421.html     Spring Boot 系列（三）属性配置&自定义属性配置
 
         SpringApplication app = new SpringApplication(SpringBootSampleApplication.class);
         app.setAddCommandLineProperties(false);
@@ -56,7 +56,7 @@ public class SpringBootSampleApplication {
 
         Properties properties = new Properties();
         //设置配置文件的路径和名字
-        properties.put("spring.config.location","classpath:conf/app.properties");
+        properties.put("spring.config.location", "classpath:conf/app.properties");
 
         app.setDefaultProperties(properties);
 
@@ -71,9 +71,9 @@ public class SpringBootSampleApplication {
         ConfigurableEnvironment environment = context.getEnvironment();
         System.out.println(environment.getProperty("local.ip"));
         //第二种方式
-        ((UserConfig)context.getBean("userConfig")).showIp();
+        ((UserConfig) context.getBean("userConfig")).showIp();
         //第三种方式
-        ((UserConfig)context.getBean("userConfig")).show();
+        ((UserConfig) context.getBean("userConfig")).show();
 
         // spring boot 读取其他配置文件
 
@@ -103,10 +103,16 @@ public class SpringBootSampleApplication {
         System.out.println(context.getBeansOfType(Runnable.class));
 
         //spring boot 09 @Enable*注解的工作原理47:07
-        System.out.println(context.getBean(Tomcat2Properties .class));
+        System.out.println(context.getBean(Tomcat2Properties.class));
         /*异步请求*/
-        Runnable bean = context.getBean(Jeep.class);
-        System.out.println(bean);
+        Object jeep = context.getBean("jeep");
+        System.out.println(jeep);
+        if (jeep instanceof Runnable) {
+
+            System.out.println("----");
+            Runnable j = (Runnable) jeep;
+            j.run();
+        }
         System.out.println("===end===");
 
     }

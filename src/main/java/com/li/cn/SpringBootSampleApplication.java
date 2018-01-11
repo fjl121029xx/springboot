@@ -92,7 +92,9 @@ public class SpringBootSampleApplication {
 
         //基于条件的自动配置
         System.out.println(context.getBeansOfType(EncodingConvert.class));
+        System.out.println(context.getEnvironment().getProperty("file.encoding"));
 
+        System.out.println(context.getBeansOfType(Runnable.class));
 
     }
 }

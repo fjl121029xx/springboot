@@ -4,6 +4,7 @@ import com.li.cn.asyn.Jeep;
 import com.li.cn.auto_configuration.EncodingConvert;
 import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
+import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,9 +29,15 @@ import java.util.Set;
 @EnableCaching
 @RestController
 @EnableAsync  //启用异步,一般适合@Async一起使用
-@EnableAutoConfiguration
-@EnableConfigurationProperties  //是用来启用一个特性,这个特性就是,可以把配置文件的属性注入到bean里面去,
-// 一般适合@ConfigurationProperties(prefix = "tomcat")
+@EnableAutoConfiguration()//引入第三方jar包,class...,
+/**从classpath中搜索所有MATE-INF/spring.factories配置文件,然后将其中key对应的配置项加载到spring容器中
+ * 1.ImportSelector 该接口的方法返回值都会被纳入到spring容器中
+ * 2.SpringFactoriesLoader 可以搜索classpath下的WETA-INF/spring.factories配置文件,并读取配置,
+ * 最终由该接口的selectImports方法返回
+ * 3.只有spring.boot.enableautoconfiguration=true才起作用
+ * */
+@EnableConfigurationProperties  /**是用来启用一个特性,这个特性就是,可以把配置文件的属性注入到bean里面去,
+                一般适合@ConfigurationProperties(prefix = "tomcat")*/
 //@Import({User.class, Role.class, MyConfiguration.class})//用来导入一个或多个类,bean就会被spring容器托管
 //@Import(MyImportSelector.class)
 //ImportSelector,
@@ -125,8 +132,16 @@ public class SpringBootSampleApplication {
         System.out.println("===end===");
 
         //@Enable*注解的工作原理47:07
-        System.out.println(context.getBean(User.class));
-        System.out.println(context.getBean(Role.class));
+        try {
+
+            System.out.println(context.getBean(User.class));
+            System.out.println(context.getBean(Role.class));
+        } catch (Exception e) {
+
+        }
+        //@EnableAutoConfiguration 深入分析30:55
+        System.out.println(context.getBean(Dog.class));
+
 
     }
 }

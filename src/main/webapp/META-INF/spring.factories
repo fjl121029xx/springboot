@@ -1,0 +1,2 @@
+#spring.boot.enableautoconfiguration=false
+org.springframework.boot.context.properties.EnableConfigurationProperties=com.li.cn.enableAutoConfiguration_deep.Dog

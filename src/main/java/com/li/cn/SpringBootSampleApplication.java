@@ -4,6 +4,7 @@ import com.li.cn.asyn.Jeep;
 import com.li.cn.auto_configuration.EncodingConvert;
 import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
+import com.li.cn.enable_theory.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +27,16 @@ import java.util.Set;
 @SpringBootApplication()
 @EnableCaching
 @RestController
-@EnableAsync
+@EnableAsync  //启用异步,一般适合@Async一起使用
 @EnableAutoConfiguration
-@EnableConfigurationProperties
+@EnableConfigurationProperties  //是用来启用一个特性,这个特性就是,可以把配置文件的属性注入到bean里面去,
+// 一般适合@ConfigurationProperties(prefix = "tomcat")
+//@Import({User.class, Role.class, MyConfiguration.class})//用来导入一个或多个类,bean就会被spring容器托管
+//@Import(MyImportSelector.class)
+//ImportSelector,
+// ImportBeanDefinitionRegistrar
+//@EnableLog(name = "my springboot")
+@EnableEcho(packages = {"com.li.cn.enable_theory.Cat"})
 public class SpringBootSampleApplication {
 
     @RequestMapping("/")
@@ -114,6 +123,10 @@ public class SpringBootSampleApplication {
             j.run();
         }
         System.out.println("===end===");
+
+        //@Enable*注解的工作原理47:07
+        System.out.println(context.getBean(User.class));
+        System.out.println(context.getBean(Role.class));
 
     }
 }

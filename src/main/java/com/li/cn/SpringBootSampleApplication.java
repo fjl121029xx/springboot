@@ -6,6 +6,8 @@ import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
 import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
+import com.li.cn.event_listen.MyApplicationEvent;
+import com.li.cn.event_listen.MyApplicationListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -78,6 +80,22 @@ public class SpringBootSampleApplication {
 
         ConfigurableApplicationContext context = app.run(args);
 
+        //11 Spring Boot 事件监听27:53 --四种方式讲解如何配置事件监听
+        /**
+         * 1.自定义事件:一般继承ApplicationEvennt
+         * 2.自定义监听器,一般实现ApplicationListener接口
+         * 3.配置监听器,要把监听器加入到spring监听器容器中
+         * 4.发布事件,使用ApplicationContext.pulishEvent发布事件
+         *
+         * 配置监听器
+         *  1,app.addListeners(new MyApplicationListener ());
+         *  2,@Compoent
+         *  3,使用context.listener.classes配置项
+         *  4,使用注解@Listener在方法上,并且改类要纳入到spring容器中管理  参照EventListenerMethodProcessor
+         */
+        //app.addListeners(new MyApplicationListener ());
+        context.publishEvent(new MyApplicationEvent(new Object()));
+
 //        ConfigurableApplicationContext context = SpringApplication.run(SpringBootSampleApplication.class, args);
 //        context.getBean(Runnable.class).run();
 //        System.out.println(context.getBean(List.class));
@@ -131,17 +149,19 @@ public class SpringBootSampleApplication {
         }
         System.out.println("===end===");
 
-        //@Enable*注解的工作原理47:07
+        //09 @Enable*注解的工作原理47:07
         try {
 
             System.out.println(context.getBean(User.class));
             System.out.println(context.getBean(Role.class));
         } catch (Exception e) {
-
+            System.out.println("aya");
         }
-        //@EnableAutoConfiguration 深入分析30:55
+        //10 @EnableAutoConfiguration 深入分析30:55
         System.out.println(context.getBean(Dog.class));
 
+        context.stop();
+        context.close();
 
     }
 }

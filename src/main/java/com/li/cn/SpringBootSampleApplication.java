@@ -4,6 +4,7 @@ import com.li.cn.asyn.Jeep;
 import com.li.cn.auto_configuration.EncodingConvert;
 import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
+import com.li.cn.boot_extension.MyApplicationContextInitializer;
 import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
 import com.li.cn.event_listen.MyApplicationEvent;
@@ -38,8 +39,9 @@ import java.util.Set;
  * 最终由该接口的selectImports方法返回
  * 3.只有spring.boot.enableautoconfiguration=true才起作用
  * */
-@EnableConfigurationProperties  /**是用来启用一个特性,这个特性就是,可以把配置文件的属性注入到bean里面去,
-                一般适合@ConfigurationProperties(prefix = "tomcat")*/
+@EnableConfigurationProperties
+/**是用来启用一个特性,这个特性就是,可以把配置文件的属性注入到bean里面去,
+ 一般适合@ConfigurationProperties(prefix = "tomcat")*/
 //@Import({User.class, Role.class, MyConfiguration.class})//用来导入一个或多个类,bean就会被spring容器托管
 //@Import(MyImportSelector.class)
 //ImportSelector,
@@ -78,7 +80,7 @@ public class SpringBootSampleApplication {
 
         app.setDefaultProperties(properties);
 
-        ConfigurableApplicationContext context = app.run(args);
+        ConfigurableApplicationContext context = app.run("aa", "bb");
 
         //11 Spring Boot 事件监听27:53 --四种方式讲解如何配置事件监听
         /**
@@ -95,6 +97,32 @@ public class SpringBootSampleApplication {
          */
         //app.addListeners(new MyApplicationListener ());
         context.publishEvent(new MyApplicationEvent(new Object()));
+
+        //12 Spring Boot 扩展分析33:54
+        /**
+         * ApplicationContextInitializer 接口是spring容器执行refreshed之前的一个回调
+         * 使用步骤:
+         *  1:写一个类,实现ApplicationContextInitializer接口
+         *  2:注册实现ApplicationContextInitializer接口
+         *
+         * 注册方法:
+         *  1:SpringApplication.addInitializers
+         *  2:context.initializer.classes
+         *  3:可以通过WETA-INF/spring.factories
+         */
+//        app.addInitializers(new MyApplicationContextInitializer());
+        /**
+         * CommandLineRunner 接口是容器启动成功后的最后一步回调
+         *  1:写一个类,实现CommandLineRunner接口
+         *  2:把该类纳入到spring容器管理中
+         *
+         *  CommandLineRunner  ApplicationRunner区别
+         *   CommandLineRunner的参数是原始参数,没有处理
+         *   ApplicationRunner的参数是ApplicationArguments,是对原始参数进一步的封装,
+         *
+         *  ApplicationArguments是对参数(main方法)做了进一步处理
+         *  可以解析--name=value的,我们就可以通过name来获取value
+         */
 
 //        ConfigurableApplicationContext context = SpringApplication.run(SpringBootSampleApplication.class, args);
 //        context.getBean(Runnable.class).run();

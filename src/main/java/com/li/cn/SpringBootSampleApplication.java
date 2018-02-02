@@ -1,5 +1,6 @@
 package com.li.cn;
 
+import com.google.gson.Gson;
 import com.li.cn.asyn.Jeep;
 import com.li.cn.auto_configuration.EncodingConvert;
 import com.li.cn.auto_configuration.GBKEncodingConvert;
@@ -9,10 +10,14 @@ import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
 import com.li.cn.event_listen.MyApplicationEvent;
 import com.li.cn.event_listen.MyApplicationListener;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -23,12 +28,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
-@SpringBootApplication()
+@SpringBootApplication(scanBasePackages = "com.li.cn", exclude = GsonAutoConfiguration.class)
 @EnableCaching
 @RestController
 @EnableAsync  //启用异步,一般适合@Async一起使用
@@ -48,7 +50,11 @@ import java.util.Set;
 // ImportBeanDefinitionRegistrar
 //@EnableLog(name = "my springboot")
 @EnableEcho(packages = {"com.li.cn.enable_theory.Cat"})
+@ServletComponentScan
 public class SpringBootSampleApplication {
+
+    @Value("${server.host:localhost }")
+    private String serverhost;
 
     @RequestMapping("/")
     String home() {
@@ -70,6 +76,22 @@ public class SpringBootSampleApplication {
         //https://www.cnblogs.com/magicalSam/p/7189421.html     Spring Boot 系列（三）属性配置&自定义属性配置
 
         SpringApplication app = new SpringApplication(SpringBootSampleApplication.class);
+        //13 Spring Boot 补充讲解21:59
+        /**
+         * SpringApplication.setBannerMode(Banner.Mode.CONSOLE);
+         * 自定义banner方法
+         * 在classpath下放一个banner.txt文件即可
+         * banner.location 配置项指定banner的文件路径
+         * banner.chatset
+         * banner.img.location 配置项指定图片banner的文件路径
+         */
+//        app.setBannerMode(Banner.Mode.CONSOLE);
+
+        Map<String, Object> defaultProperties = new HashMap<>();
+        defaultProperties.put("server.host", "192.168.1.100");
+        app.setDefaultProperties(defaultProperties);
+
+
         app.setAddCommandLineProperties(false);
         //--spring.profiles.active=test
         app.setAdditionalProfiles("dev");
@@ -188,8 +210,14 @@ public class SpringBootSampleApplication {
         //10 @EnableAutoConfiguration 深入分析30:55
         System.out.println(context.getBean(Dog.class));
 
-        context.stop();
-        context.close();
+        //13 Spring Boot 补充讲解21:59
+        System.out.println("13 :　" + context.getBean("creatRunnable9"));
+        System.out.println(context.getBean(Gson.class));
+        System.out.println(context.getEnvironment().getProperty("server.host", "aaa"));
+        System.out.println(context.getBean(SpringBootSampleApplication.class).serverhost);
 
+
+        /*context.stop();
+        context.close();*/
     }
 }

@@ -10,12 +10,14 @@ import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
 import com.li.cn.event_listen.MyApplicationEvent;
 import com.li.cn.event_listen.MyApplicationListener;
+import com.sun.javaws.exceptions.ErrorCodeResponseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
@@ -30,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
 
-@SpringBootApplication(scanBasePackages = "com.li.cn", exclude = GsonAutoConfiguration.class)
+@SpringBootApplication(scanBasePackages = "com.li.cn", exclude = {GsonAutoConfiguration.class, ErrorMvcAutoConfiguration.class})
 @EnableCaching
 @RestController
 @EnableAsync  //启用异步,一般适合@Async一起使用
@@ -215,6 +217,7 @@ public class SpringBootSampleApplication {
         System.out.println(context.getBean(Gson.class));
         System.out.println(context.getEnvironment().getProperty("server.host", "aaa"));
         System.out.println(context.getBean(SpringBootSampleApplication.class).serverhost);
+
 
 
         /*context.stop();

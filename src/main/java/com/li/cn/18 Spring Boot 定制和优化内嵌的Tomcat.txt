@@ -1,0 +1,13 @@
+--定制和优化Tomcat，以编码的方式设置Tomcat的各个属性值，以及Tomcat的日志配置
+
+interface EmbeddedServletContainerCustomizer
+
+public void customize(ConfigurableEmbeddedServletContainer  container) {
+
+    TomcatEmbeddedServletContainerFactory  factory =  (TomcatEmbeddedServletContainerFactory) container;
+
+    factory.setPort(10003);
+    factory.setBaseDirectory(new File("E:/tmp/tomcat"));
+
+
+}

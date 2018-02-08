@@ -1,13 +1,78 @@
 --定制和优化Tomcat，以编码的方式设置Tomcat的各个属性值，以及Tomcat的日志配置
-
+//第一种方式-------------------------------------------------------------------------------
+//:实现EmbeddedServletContainerCustomizer接口,并把实现类纳入到spring容器中管理
 interface EmbeddedServletContainerCustomizer
+@Component
+public class MyEmbeddedServletContainerCustomizer implement EmbeddedServletContainerCustomizer {
 
-public void customize(ConfigurableEmbeddedServletContainer  container) {
+    public void customize(ConfigurableEmbeddedServletContainer  container) {
 
-    TomcatEmbeddedServletContainerFactory  factory =  (TomcatEmbeddedServletContainerFactory) container;
+        TomcatEmbeddedServletContainerFactory  factory =  (TomcatEmbeddedServletContainerFactory) container;
 
-    factory.setPort(10003);
-    factory.setBaseDirectory(new File("E:/tmp/tomcat"));
+        factory.setPort(10003);
+        factory.setBaseDirectory(new File("E:/tmp/tomcat"));
+
+        //factory.setEngineValves(getAccessLogValue());
+        factory.setContextValves(getAccessLogValue());
+
+        factory.addConnectorCustomizers(new MyTomcatConnectorCustomizer());
+
+    }
+
+    private AccessLogValue getAccessLogValue() {
+
+        AccessLogValue log = new AccessLogValue();
+
+        log.setDirectory("d:/tmp/logs");
+        log.setEnable(true);
+        log.setPattern("common");
+        log.setPrefix("springboot-access-log");
+        log.setSuffix(".txt");
+        return log;
+    }
+}
 
 
+class MyTomcatConnectorCustomizer implement TomcatConnectorCustomizer {
+
+    pulic void customize(Connector connector) {
+
+        HttpNioProtocal protocal = (HttpNioProtocal) connector.getProtocalHandler();
+        protocal.setMaxConnections(2000);
+        protocal.setMaxThreads(500);
+    }
+}
+//----------------------------------------------------------------------------------------
+//第二种方式-------------------------------------------------------------------------------
+//:在spring容器中装配一个EmbeddedServlerContainerFactory对象
+@SpringBootConfiguration
+public class WebServletConfiguration {
+
+    @Bean
+    public EmbeddedServlerContainerFactory createEmbeddedServletContainerFactory() {
+
+        TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
+
+        factory.setport(10003);
+        factory.addErrorPage(new ErrorPage(HttpStatus.NOT_FOUNT,"/404.html"));
+        factory.addContextValves(getlLogAccessLogValve());
+        factory.addInitializers((servletContext) -> {
+
+            System.out.println("=================");
+            servletContext.setAttribute("startup","true");
+        });
+        return factory;
+    }
+
+    private AccessLogValve getlLogAccessLogValve() {
+
+        AccessLogValve log = new AccessLogValve();
+
+        log.setDirectory("d:/tmp/logs");
+        log.setEnable(true);
+        log.setPattern("common");
+        log.setPrefix("springboot-access-log");
+        log.setSuffix(".txt");
+        return log;
+    }
 }

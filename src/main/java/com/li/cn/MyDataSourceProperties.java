@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 //第三读取配置文件的方式
 @ConfigurationProperties(prefix = "ds"/*, locations="classpath:conf/ds.properties"*/)
 @Component
-public class DataSourceProperties {
+public class MyDataSourceProperties {
 
     private String url;
     private String driver;

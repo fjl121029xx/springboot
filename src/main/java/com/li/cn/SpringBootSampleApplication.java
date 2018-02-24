@@ -6,6 +6,7 @@ import com.li.cn.auto_configuration.EncodingConvert;
 import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
 import com.li.cn.boot_extension.MyApplicationContextInitializer;
+import com.li.cn.dao.ProductDao;
 import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
 import com.li.cn.event_listen.MyApplicationEvent;
@@ -17,6 +18,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
@@ -26,10 +28,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
 
 @SpringBootApplication(scanBasePackages = "com.li.cn", exclude = {GsonAutoConfiguration.class, ErrorMvcAutoConfiguration.class})
@@ -77,6 +83,9 @@ public class SpringBootSampleApplication {
 
         //https://www.cnblogs.com/magicalSam/p/7189421.html     Spring Boot 系列（三）属性配置&自定义属性配置
 
+        //http://shiyanjun.cn/archives/1097.html
+
+        //http://blog.csdn.net/qq_36348557/article/details/69396589
         SpringApplication app = new SpringApplication(SpringBootSampleApplication.class);
         //13 Spring Boot 补充讲解21:59
         /**
@@ -165,7 +174,7 @@ public class SpringBootSampleApplication {
 
         System.out.println(context.getBean(JDBCConfig.class));
         System.out.println(context.getBean(FileConfig.class));
-        System.out.println(context.getBean(DataSourceProperties.class));
+        System.out.println(context.getBean(MyDataSourceProperties.class));
 
 
         //application.yml
@@ -218,8 +227,37 @@ public class SpringBootSampleApplication {
         System.out.println(context.getEnvironment().getProperty("server.host", "aaa"));
         System.out.println(context.getBean(SpringBootSampleApplication.class).serverhost);
 
+        //19 Spring Boot JDBC38:38 --多种数据源的配置、JdbcTemplate、事务的处理
+        /**
+         * 装配DataSourced的步骤:
+         *  1:加入数据库驱动
+         *  2:配置application.properties
+         *
+         */
+        DataSource ds = context.getBean(DataSource.class);
+        System.out.println(ds.getClass());
+        Connection conn = null;
+        try {
+            conn = ds.getConnection();
 
+            System.out.println(conn.getSchema());
+            System.out.println(conn.getCatalog());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
 
+                try {
+                    conn.close();
+                    conn = null;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        System.out.println(context.getBean(JdbcTemplate.class));
+        context.getBean(ProductDao.class).add("12");
         /*context.stop();
         context.close();*/
     }

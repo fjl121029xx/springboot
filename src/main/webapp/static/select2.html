@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script src="js/jquery-3.0.0.min.js"></script>
+		<script src="js/select2.full.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/select2.min.css" />
+		<script src="js/jquery.min.js"></script>
+		<script src="js/searchData.js"></script>
+
+	</head>
+	<script>
+		$(function() {
+			$(".js-example-disabled").select2({
+				data:searchdata,
+				placeholder:'请选择',
+				allowClear:true
+			});
+		});
+	</script>
+
+	<body>
+
+		<select class="js-example-disabled">
+
+		</select>
+
+	</body>
+
+</html>

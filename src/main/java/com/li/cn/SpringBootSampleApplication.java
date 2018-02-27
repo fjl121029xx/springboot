@@ -30,6 +30,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,6 +60,7 @@ import java.util.*;
 //@EnableLog(name = "my springboot")
 @EnableEcho(packages = {"com.li.cn.enable_theory.Cat"})
 @ServletComponentScan
+@EnableTransactionManagement
 public class SpringBootSampleApplication {
 
     @Value("${server.host:localhost }")
@@ -232,6 +234,19 @@ public class SpringBootSampleApplication {
          * 装配DataSourced的步骤:
          *  1:加入数据库驱动
          *  2:配置application.properties
+         *      spring.datasource.driverClassName=com.mysql.cj.jdbc.Driver
+         *      spring.datasource.url=jdbc:mysql://127.0.0.1:3306/sims?serverTimezone=UTC
+         *      spring.datasource.username=root
+         *      spring.datasource.password=root
+         *      #spring.datasource.type=com.zaxxer.hikari.HikariDataSource
+         *      spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+         *      以上操作,springboot会自动装配好DataSource,jdbctemplate,可以直接使用
+         *
+         *      sptring.datasource.type可以指定具体使用哪种数据源
+         *      默认支持tomcat-jdbc,hikari,dbcp,dbp2
+         *
+         *      配置自己的DataSource
+         *      只需要装配一个DataSource到spring容器中即可
          *
          */
         DataSource ds = context.getBean(DataSource.class);
@@ -240,8 +255,8 @@ public class SpringBootSampleApplication {
         try {
             conn = ds.getConnection();
 
-            System.out.println(conn.getSchema());
-            System.out.println(conn.getCatalog());
+            /*System.out.println(conn.getSchema());
+            System.out.println(conn.getCatalog());*/
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -258,6 +273,7 @@ public class SpringBootSampleApplication {
 
         System.out.println(context.getBean(JdbcTemplate.class));
         context.getBean(ProductDao.class).add("12");
+        context.getBean(ProductDao.class).batchAdd("1","2","3");
         /*context.stop();
         context.close();*/
     }

@@ -3,6 +3,7 @@ package com.li.cn.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class ProductDao {
@@ -12,7 +13,18 @@ public class ProductDao {
 
     public void add(String name) {
 
-        String sql = "insert into product (product_name) values( '" + name + "' )";
+        String sql = String.format("insert into product (product_name) values( '%s' )", name);
         jdbcTemplate.execute(sql);
     }
+
+    @Transactional(rollbackFor = Exception.class,noRollbackForClassName = "")
+    public void batchAdd(String... name) {
+        for (int r = 0; r < name.length; r++) {
+
+            String sql = String.format("insert into product (product_name) values( '%s' )", name[r]);
+            jdbcTemplate.execute(sql);
+        }
+    }
+
+
 }

@@ -7,6 +7,7 @@ import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
 import com.li.cn.boot_extension.MyApplicationContextInitializer;
 import com.li.cn.dao.ProductDao;
+import com.li.cn.dao.UserDao;
 import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
 import com.li.cn.event_listen.MyApplicationEvent;
@@ -26,6 +27,7 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -58,6 +60,7 @@ import java.util.*;
 //ImportSelector,
 // ImportBeanDefinitionRegistrar
 //@EnableLog(name = "my springboot")
+//@EnableAspectJAutoProxy
 @EnableEcho(packages = {"com.li.cn.enable_theory.Cat"})
 @ServletComponentScan
 @EnableTransactionManagement
@@ -273,7 +276,22 @@ public class SpringBootSampleApplication {
 
         System.out.println(context.getBean(JdbcTemplate.class));
         context.getBean(ProductDao.class).add("12");
-        context.getBean(ProductDao.class).batchAdd("1","2","3");
+        context.getBean(ProductDao.class).batchAdd("1", "2", "3");
+
+        //20 Spring Boot AOP 24:24
+        /**
+         * AOP开发流程
+         * 1,spring-boot-starter-aop,加入依赖,默认开启了AOP的支持
+         * 2,写一个Aspect,封装横切关注点(日志,监控等待),需要配置通知
+         * 3,这个aspect需要纳入到spring容器管理,并且需要@Aspect
+         *
+         * spring.aop.auto=false  是否启用AOP
+         * spring.aop.proxy-target-class=false 使用JDK
+         */
+        context.getBean(UserDao.class).add("tom", "123");
+
+
+
         /*context.stop();
         context.close();*/
     }

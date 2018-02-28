@@ -17,7 +17,7 @@ public class ProductDao {
         jdbcTemplate.execute(sql);
     }
 
-    @Transactional(rollbackFor = Exception.class,noRollbackForClassName = "")
+    @Transactional(rollbackFor = Exception.class)
     public void batchAdd(String... name) {
         for (int r = 0; r < name.length; r++) {
 

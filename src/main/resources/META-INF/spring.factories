@@ -1,1 +1,2 @@
 org.springframework.boot.env.EnvironmentPostProcessor=com.li.cn.MyEnvironmentPostProcessor
+org.springframework.boot.autoconfiguration.EnableAutoConfiguration=com.li.cn.redis.RedisAutoConfiguration

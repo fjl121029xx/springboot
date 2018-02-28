@@ -12,6 +12,7 @@ import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
 import com.li.cn.event_listen.MyApplicationEvent;
 import com.li.cn.event_listen.MyApplicationListener;
+import com.li.cn.redis.EnableRedis;
 import com.sun.javaws.exceptions.ErrorCodeResponseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
@@ -35,6 +36,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -64,6 +66,7 @@ import java.util.*;
 @EnableEcho(packages = {"com.li.cn.enable_theory.Cat"})
 @ServletComponentScan
 @EnableTransactionManagement
+//@EnableRedis
 public class SpringBootSampleApplication {
 
     @Value("${server.host:localhost }")
@@ -290,8 +293,16 @@ public class SpringBootSampleApplication {
          */
         context.getBean(UserDao.class).add("tom", "123");
 
-
-
+        //21 Spring Boot Starter18:31   --快速构建自定义的Spring Boot Starter
+//        System.out.println(context.getBean(Jedis.class));
+        /**
+         * 自己开发一个spring-boot-starter的步骤
+         * 1:新建一个项目,
+         * 2:需要一个配置类,配置类里面需要装配好需要提供出去的类
+         * 3:
+         *      (1)使用@Enable,使用@Import导入需要装配的类
+         *      (2)/META-INF/spring.factories,在org.springframework.boot.autoconfiguration.EnableAutoConfiguration配置需要装配的类
+         */
         /*context.stop();
         context.close();*/
     }

@@ -15,11 +15,10 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-core:5.0.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jcl:5.0.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.19" />
-          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-log4j2:1.4.0.RELEASE" />
+          <element id="file-copy" path="$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-log4j2/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-log4j2-2.0.0.BUILD-20180301.043903-634.jar" output-file-name="spring-boot-starter-log4j2-2.0.0.BUILD-SNAPSHOT.jar" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-slf4j-impl:2.10.0" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-api:2.10.0" />
           <element id="library" level="project" name="Maven: org.apache.logging.log4j:log4j-core:2.10.0" />
-          <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" />
           <element id="library" level="project" name="Maven: org.slf4j:jul-to-slf4j:1.7.25" />
           <element id="file-copy" path="$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-aop/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-aop-2.0.0.BUILD-20180301.043844-635.jar" output-file-name="spring-boot-starter-aop-2.0.0.BUILD-SNAPSHOT.jar" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.4.RELEASE" />
@@ -47,6 +46,12 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-web:5.0.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.0.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.4.RELEASE" />
+          <element id="file-copy" path="$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-actuator/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-actuator-2.0.0.BUILD-20180301.043842-635.jar" output-file-name="spring-boot-starter-actuator-2.0.0.BUILD-SNAPSHOT.jar" />
+          <element id="file-copy" path="$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-actuator-autoconfigure/2.0.0.BUILD-SNAPSHOT/spring-boot-actuator-autoconfigure-2.0.0.BUILD-20180301.043801-635.jar" output-file-name="spring-boot-actuator-autoconfigure-2.0.0.BUILD-SNAPSHOT.jar" />
+          <element id="file-copy" path="$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-actuator/2.0.0.BUILD-SNAPSHOT/spring-boot-actuator-2.0.0.BUILD-20180301.043803-635.jar" output-file-name="spring-boot-actuator-2.0.0.BUILD-SNAPSHOT.jar" />
+          <element id="library" level="project" name="Maven: io.micrometer:micrometer-core:1.0.1" />
+          <element id="library" level="project" name="Maven: org.hdrhistogram:HdrHistogram:2.1.10" />
+          <element id="library" level="project" name="Maven: org.latencyutils:LatencyUtils:2.0.3" />
           <element id="file-copy" path="$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-jdbc/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-jdbc-2.0.0.BUILD-20180301.043858-634.jar" output-file-name="spring-boot-starter-jdbc-2.0.0.BUILD-SNAPSHOT.jar" />
           <element id="library" level="project" name="Maven: com.zaxxer:HikariCP:2.7.8" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.0.4.RELEASE" />

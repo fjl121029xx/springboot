@@ -12,10 +12,14 @@ import javax.websocket.server.PathParam;
 @Controller
 public class UserController {
 
+
+    //private CounterService counterServie;
+    //private GaugeService gaugeService;
+
     @RequestMapping(value = "/user/home", method = RequestMethod.GET)
     @ResponseBody
     public String home() {
-
+        //counterService.increment("user home ");
         return "user home";
     }
 
@@ -23,7 +27,7 @@ public class UserController {
     @ResponseBody
     @PostMapping("/user/show")
     public String show() {
-
+        //gaugeService.submit("user.create.name",123);
         return "user show";
     }
 

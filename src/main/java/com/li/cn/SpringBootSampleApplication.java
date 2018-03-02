@@ -93,7 +93,7 @@ public class SpringBootSampleApplication {
         //https://www.cnblogs.com/magicalSam/p/7189421.html     Spring Boot 系列（三）属性配置&自定义属性配置
 
         //http://shiyanjun.cn/archives/1097.html
-
+        //http://blog.csdn.net/qq_20367813/article/details/79161956
         //http://blog.csdn.net/qq_36348557/article/details/69396589
         SpringApplication app = new SpringApplication(SpringBootSampleApplication.class);
         //13 Spring Boot 补充讲解21:59
@@ -322,6 +322,22 @@ public class SpringBootSampleApplication {
          *
          */
         context.getBean(StudentDao.class).log();
+
+        //23 Spring Boot 监控和度量47:09     --Spring Boot内置的监控点、自定义的监控状况检查、自定义度量统计，输出等等
+        /**
+         * CounterService  用来计数服务,可以直接使用
+         * GaugeService  用来统计某个值,可以直接使用
+         *
+         * Metric不仅可以输出到页面,还可以输出到jms,redis等地方
+         * 通过向spring容器中装配一个MetricWriter来实现定向输出
+         */
+        //24 Spring Boot 测试54:13     --实战演示在Spring Boot里面的测试案例，以及如何测试Controller
+        /**
+         *  直接在测试类上面加如下两个注解:
+         *      @RunWith(SpringRunner.class)
+         *      @SpringBootTest
+         */
+
 
         /*context.stop();
         context.close();*/

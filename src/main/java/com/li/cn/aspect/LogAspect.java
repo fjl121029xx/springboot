@@ -14,7 +14,7 @@ public class LogAspect {
     @Before("execution(* com.li.cn.dao.UserDao..*(..))")
     public void log() {
 
-        System.out.println("Before method log done" + AopContext.currentProxy().getClass());
+//        System.out.println("Before method log done" + AopContext.currentProxy().getClass());
     }
 
     @After("execution(* com.li.cn.dao.UserDao..*(..))")

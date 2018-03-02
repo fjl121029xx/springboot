@@ -12,10 +12,10 @@ import redis.clients.jedis.Jedis;
 @EnableConfigurationProperties(RedisProperties.class)
 public class RedisAutoConfiguration {
 
-    @Bean
+    /*@Bean
     @ConditionalOnMissingClass
     public Jedis createJRedis(RedisProperties properties) {
 
         return new Jedis(properties.getHost(), properties.getPort());
-    }
+    }*/
 }

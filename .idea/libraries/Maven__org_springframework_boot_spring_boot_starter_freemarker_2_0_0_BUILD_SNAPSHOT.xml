@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: org.springframework.boot:spring-boot-starter-freemarker:2.0.0.BUILD-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-freemarker/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-freemarker-2.0.0.BUILD-20180228.020313-622.jar!/" />
+      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-freemarker/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-freemarker-2.0.0.BUILD-20180301.043855-634.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-freemarker/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-freemarker-2.0.0.BUILD-20180228.020313-622-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-freemarker/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-freemarker-2.0.0.BUILD-20180301.043855-634-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-freemarker/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-freemarker-2.0.0.BUILD-20180228.020313-622-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.m2/repository/org/springframework/boot/spring-boot-starter-freemarker/2.0.0.BUILD-SNAPSHOT/spring-boot-starter-freemarker-2.0.0.BUILD-20180301.043855-634-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

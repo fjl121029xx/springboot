@@ -7,6 +7,7 @@ import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
 import com.li.cn.boot_extension.MyApplicationContextInitializer;
 import com.li.cn.dao.ProductDao;
+import com.li.cn.dao.StudentDao;
 import com.li.cn.dao.UserDao;
 import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
@@ -303,6 +304,25 @@ public class SpringBootSampleApplication {
          *      (1)使用@Enable,使用@Import导入需要装配的类
          *      (2)/META-INF/spring.factories,在org.springframework.boot.autoconfiguration.EnableAutoConfiguration配置需要装配的类
          */
+
+        //22 Spring Boot 日志30:58    --演示了如何在Spring Boot里面使用日志配置，以及logback，log4j2等日志的使用
+        /**
+         * springboot默认日志的级别是Info
+         * 可以通过logging.level.*=debug来设置, * 可以是包,也可以是某个类
+         *
+         * 日志级别:TRACE ,DEBUG ,INFO ,WARN ,ERROR ,FATAL ,OFF
+         * 日志级别配置成OFF,表示关闭日志输出
+         *
+         * #logging.level.root=DEBUG
+         * #指定文件路径
+         * #logging.file=d:/tmp/my.log
+         * #logging.path=d:/tmp/logs
+         * #logging.pattern.console=
+         * #logging.file.console=
+         *
+         */
+        context.getBean(StudentDao.class).log();
+
         /*context.stop();
         context.close();*/
     }

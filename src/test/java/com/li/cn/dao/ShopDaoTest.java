@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest()
 public class ShopDaoTest {
 
     @Autowired
@@ -16,6 +16,8 @@ public class ShopDaoTest {
 
     @Test
     public void addShop() throws Exception {
+
+        System.out.println(shopDao);
         Assert.assertEquals(Integer.valueOf(1),shopDao.addShop("root"));
         Assert.assertEquals(Integer.valueOf(0),shopDao.addShop(null));
     }

@@ -349,7 +349,15 @@ public class SpringBootSampleApplication {
         product.setPrice(68.72);
 
         productMapper.addProduct(product);
-
+        //25 Spring Boot 构建微服务实战01:01:50    --一分钟配置一个Spring boot + Mybatis的微服务环境
+        /**
+         * 服务注册方 curator-x-discovery-server
+         * 服务消费方curator-x-discovery
+         */
+        /**
+         * 注册中心:zk
+         * 服务提供方,需要在服务启动时,把服务的信息注册到注册中心去
+         */
 
 
         /*context.stop();

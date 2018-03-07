@@ -358,7 +358,16 @@ public class SpringBootSampleApplication {
          * 注册中心:zk
          * 服务提供方,需要在服务启动时,把服务的信息注册到注册中心去
          */
-
+        //27 Spring Boot 应用的打包和部署35:41  --两种方式演示服务的打包，部署，运行
+        /**
+         * 第一种方式:
+         * mvn clean package dependency:copy-dependencies
+         * java -Djava.ext.dirs= com.li.cn.SpringBootSampleApplication
+         *
+         *
+         * http://www.mojohaus.org/appassembler/appassembler-maven-plugin/generate-daemons-mojo.html
+         * mvc clean appassembler:assemble
+         */
 
         /*context.stop();
         context.close();*/

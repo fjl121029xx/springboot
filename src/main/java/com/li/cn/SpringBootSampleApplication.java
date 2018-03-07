@@ -5,6 +5,7 @@ import com.li.cn.asyn.Jeep;
 import com.li.cn.auto_configuration.EncodingConvert;
 import com.li.cn.auto_configuration.GBKEncodingConvert;
 import com.li.cn.auto_configuration.UTF8EncodingConvert;
+import com.li.cn.bean.ProductEntity;
 import com.li.cn.boot_extension.MyApplicationContextInitializer;
 import com.li.cn.dao.ProductDao;
 import com.li.cn.dao.StudentDao;
@@ -13,8 +14,10 @@ import com.li.cn.enableAutoConfiguration_deep.Dog;
 import com.li.cn.enable_theory.*;
 import com.li.cn.event_listen.MyApplicationEvent;
 import com.li.cn.event_listen.MyApplicationListener;
+import com.li.cn.mapper.ProductMapper;
 import com.li.cn.redis.EnableRedis;
 import com.sun.javaws.exceptions.ErrorCodeResponseException;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
@@ -67,6 +70,7 @@ import java.util.*;
 @EnableEcho(packages = {"com.li.cn.enable_theory.Cat"})
 @ServletComponentScan
 @EnableTransactionManagement
+@MapperScan("com.li.cn.mapper")
 //@EnableRedis
 public class SpringBootSampleApplication {
 
@@ -337,6 +341,15 @@ public class SpringBootSampleApplication {
          *      @RunWith(SpringRunner.class)
          *      @SpringBootTest
          */
+        //25 Spring Boot 构建微服务实战01:01:50    --一分钟配置一个Spring boot + Mybatis的微服务环境
+        ProductMapper productMapper = context.getBean(ProductMapper.class);
+        ProductEntity product = new ProductEntity();
+        product.setPname("经济思想史");
+        product.setType("书籍");
+        product.setPrice(68.72);
+
+        productMapper.addProduct(product);
+
 
 
         /*context.stop();

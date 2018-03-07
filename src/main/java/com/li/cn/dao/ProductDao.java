@@ -15,7 +15,7 @@ public class ProductDao {
 
     public void add(String name) {
 
-        String sql = String.format("insert into product (product_name) values( '%s' )", name);
+        String sql = String.format("insert into products (pname) values( '%s' )", name);
         jdbcTemplate.execute(sql);
     }
 
@@ -23,7 +23,7 @@ public class ProductDao {
     public void batchAdd(String... name) {
         for (int r = 0; r < name.length; r++) {
 
-            String sql = String.format("insert into product (product_name) values( '%s' )", name[r]);
+            String sql = String.format("insert into products (pname) values( '%s' )", name[r]);
             jdbcTemplate.execute(sql);
         }
     }
